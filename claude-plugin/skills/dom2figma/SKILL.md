@@ -1,6 +1,6 @@
 ---
 name: dom2figma
-description: Перенос веб-мокапа, прототипа или сайта в Figma редактируемыми слоями через CLI dom2figma. Использовать, когда просят «перегнать в Figma», «сделать дизайн из HTML/прототипа», «экраны в фигму», «html to figma», или когда нужно снять все экраны прототипа одной командой.
+description: Move a web mockup, prototype or website into Figma as editable layers with the dom2figma CLI. Use when asked to "convert to Figma", "html to figma", "import prototype into Figma", "make a design from this HTML", «перегнать в Figma», «экраны в фигму», or whenever all screens of a prototype must be captured in one run.
 ---
 
 # dom2figma: мокап → Figma

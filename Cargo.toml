@@ -2,10 +2,10 @@
 name = "dom2figma"
 version = "0.1.0"
 edition = "2021"
-description = "Снимает отрисованный DOM веб-прототипа в JSON и переносит его в Figma редактируемыми слоями"
+description = "Capture rendered web prototypes with headless Chrome and import them into Figma as editable layers"
 license = "MIT"
 repository = "https://github.com/swrneko/dom2figma"
-keywords = ["figma", "chrome", "devtools", "design", "prototype"]
+keywords = ["figma", "html-to-figma", "chrome", "design", "prototype"]
 categories = ["command-line-utilities"]
 
 [[bin]]

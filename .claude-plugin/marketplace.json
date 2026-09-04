@@ -1,11 +1,13 @@
 {
   "name": "dom2figma",
-  "owner": { "name": "swrneko" },
+  "owner": {
+    "name": "swrneko"
+  },
   "plugins": [
     {
       "name": "dom2figma",
       "source": "./claude-plugin",
-      "description": "Скилл для Claude Code: перенос мокапа в Figma через CLI dom2figma",
+      "description": "HTML/prototype to Figma: capture rendered screens with headless Chrome and import them as editable Figma layers",
       "version": "0.1.0"
     }
   ]

@@ -1,10 +1,24 @@
 {
   "name": "dom2figma",
   "displayName": "dom2figma",
-  "description": "Перенос веб-мокапов и прототипов в Figma редактируемыми слоями через CLI dom2figma: разведка мокапа, конфиг, съёмка экранов, проверка по PNG, инструкция по импорту.",
+  "description": "Move any rendered web prototype or website into Figma as editable layers. The agent inspects the mockup, writes a dom2figma config, captures every route and app state with headless Chrome, verifies PNGs and hands over Figma import steps.",
   "version": "0.1.0",
-  "author": { "name": "swrneko", "url": "https://github.com/swrneko" },
+  "author": {
+    "name": "swrneko",
+    "url": "https://github.com/swrneko"
+  },
   "repository": "https://github.com/swrneko/dom2figma",
   "license": "MIT",
-  "keywords": ["figma", "design", "prototype", "html", "chrome"]
+  "keywords": [
+    "figma",
+    "html-to-figma",
+    "design",
+    "prototype",
+    "mockup",
+    "screenshot",
+    "headless-chrome",
+    "design-handoff",
+    "ui",
+    "frontend"
+  ]
 }
