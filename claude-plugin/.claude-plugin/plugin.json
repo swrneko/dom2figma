@@ -1,0 +1,10 @@
+{
+  "name": "dom2figma",
+  "displayName": "dom2figma",
+  "description": "Перенос веб-мокапов и прототипов в Figma редактируемыми слоями через CLI dom2figma: разведка мокапа, конфиг, съёмка экранов, проверка по PNG, инструкция по импорту.",
+  "version": "0.1.0",
+  "author": { "name": "swrneko", "url": "https://github.com/swrneko" },
+  "repository": "https://github.com/swrneko/dom2figma",
+  "license": "MIT",
+  "keywords": ["figma", "design", "prototype", "html", "chrome"]
+}
