@@ -1,0 +1,45 @@
+# Конфиг dom2figma. Пример под прототип в виде одностраничного приложения с hash-роутером
+# и служебной панелью переключения персон. Для обычного сайта достаточно `source`, `routes`
+# и, возможно, `navigation = "url"`.
+
+source = "prototype.html"          # путь к HTML или URL (http://localhost:5173)
+root = ".device"                   # корень экрана; для сайта — "body"
+font = "Inter"                     # должен быть установлен локально и существовать в Figma
+force_font = true                  # применить шрифт ко всем элементам корня
+navigation = "hash"                # hash | url | js
+settle_ms = 400                    # пауза после навигации
+out = "out"                        # каталог результатов
+png = true                         # референсные PNG каждого экрана
+
+# Внутренний скролл раскрывается, чтобы экран снимался целиком; min_height — базовая высота.
+scroll_container = ".device__scroll"
+min_height = 844
+
+[viewport]
+width = 1400
+height = 1000
+
+# CSS перед съёмкой: спрятать служебное, убрать рамку устройства, дать странице расти по высоте.
+fix_css = """
+.stand__panel{display:none!important}
+html,body,#root,.stand{height:auto!important;min-height:0!important;overflow:visible!important}
+.stand__stage{padding:0!important;display:block!important;overflow:visible!important}
+.device{border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
+"""
+
+# Общие маршруты — для групп, у которых свой список не задан.
+routes = ["/welcome", "/catalog", "/product/p01", "/cart"]
+
+# Группы состояний. setup — JS, который переводит приложение в нужное состояние.
+[[groups]]
+name = "Гость"
+setup = """
+[...document.querySelectorAll('.stand__panel .pnl__btn')].find(b => b.textContent.trim().startsWith('Гость')).click()
+"""
+
+[[groups]]
+name = "Александр Иванов"
+setup = """
+[...document.querySelectorAll('.stand__panel .pnl__btn')].find(b => b.textContent.trim().startsWith('Александр Иванов')).click()
+"""
+routes = ["/", "/cart", "/checkout", "/orders", "/orders/o1", "/profile"]

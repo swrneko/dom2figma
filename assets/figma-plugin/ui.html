@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<style>
+  body { font: 12px/1.5 Inter, -apple-system, sans-serif; margin: 0; padding: 16px; color: #222; }
+  h1 { font-size: 13px; margin: 0 0 8px; }
+  p { margin: 0 0 10px; color: #555; }
+  label { display: block; margin: 8px 0 4px; font-weight: 600; }
+  input[type=file] { width: 100%; }
+  button { margin-top: 12px; width: 100%; padding: 8px; border: 0; border-radius: 6px; background: #18a0fb; color: #fff; font-weight: 600; cursor: pointer; }
+  button:disabled { background: #bbb; cursor: default; }
+  #log { margin-top: 12px; max-height: 160px; overflow: auto; background: #f4f4f4; border-radius: 6px; padding: 8px; white-space: pre-wrap; font-family: monospace; font-size: 11px; }
+  .row { display: flex; gap: 8px; align-items: center; }
+  .row label { margin: 0; font-weight: 400; }
+</style>
+</head>
+<body>
+  <h1>dom2figma: импорт экранов из JSON</h1>
+  <p>Выберите JSON, полученный командой <code>dom2figma capture</code>. Для каждой группы состояний создаётся секция, для каждого экрана — фрейм.</p>
+  <label for="file">Файл screens.json</label>
+  <input id="file" type="file" accept=".json,application/json" />
+  <div class="row" style="margin-top:8px">
+    <input id="skipDup" type="checkbox" checked />
+    <label for="skipDup">Пропускать экраны, идентичные уже импортированным в другой группе</label>
+  </div>
+  <div class="row" style="margin-top:4px">
+    <input id="collapse" type="checkbox" checked />
+    <label for="collapse">Сворачивать обёртки без стилей (меньше вложенности)</label>
+  </div>
+  <div class="row" style="margin-top:4px">
+    <input id="pages" type="checkbox" />
+    <label for="pages">Отдельная страница на группу (на бесплатном плане лимит 3 страницы; по умолчанию — секции на текущей странице)</label>
+  </div>
+  <button id="run" disabled>Импортировать</button>
+  <div id="log"></div>
+<script>
+  let data = null;
+  const $ = (id) => document.getElementById(id);
+  const log = (m) => { $('log').textContent += m + '\n'; $('log').scrollTop = 1e9; };
+  $('file').addEventListener('change', async (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    const text = await f.text();
+    try {
+      data = JSON.parse(text);
+      const groups = data.groups || data.personas || [];
+      const n = groups.reduce((a, p) => a + p.screens.length, 0);
+      log(`Загружено: ${groups.length} групп, ${n} экранов`);
+      $('run').disabled = false;
+    } catch (err) { log('Не удалось разобрать JSON: ' + err.message); }
+  });
+  $('run').addEventListener('click', () => {
+    $('run').disabled = true;
+    parent.postMessage({ pluginMessage: { type: 'import', data, skipDup: $('skipDup').checked, collapse: $('collapse').checked, separatePages: $('pages').checked } }, '*');
+  });
+  window.onmessage = (e) => {
+    const m = e.data.pluginMessage;
+    if (!m) return;
+    if (m.type === 'log') log(m.text);
+    if (m.type === 'done') { log('Готово.'); $('run').disabled = false; }
+  };
+</script>
+</body>
+</html>

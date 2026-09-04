@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<style>
+  body { margin: 0; font-family: sans-serif; }
+  #app { width: 320px; background: #fff; }
+  .bar { height: 48px; background: #1a1a1a; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+  .card { margin: 16px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+  .hidden { color: transparent; }
+  .btn { display: block; margin: 16px; padding: 10px; background: #d4a351; text-align: center; border-radius: 4px; }
+  .badge::after { content: "NEW"; color: #a8322d; font-size: 10px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="bar">Заголовок</div>
+  <div class="card">
+    <div class="title">Карточка <span class="badge"></span></div>
+    <div class="hidden">скрытый текст</div>
+    <input class="field" placeholder="Введите имя" />
+    <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/></svg>
+  </div>
+  <div class="btn" id="screen">home</div>
+</div>
+<script>
+  // Простейший hash-роутер: подпись кнопки зависит от маршрута.
+  function render() { document.getElementById('screen').textContent = location.hash.slice(2) || 'home'; }
+  window.addEventListener('hashchange', render); render();
+</script>
+</body>
+</html>

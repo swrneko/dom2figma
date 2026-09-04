@@ -1,0 +1,30 @@
+[package]
+name = "dom2figma"
+version = "0.1.0"
+edition = "2021"
+description = "Снимает отрисованный DOM веб-прототипа в JSON и переносит его в Figma редактируемыми слоями"
+license = "MIT"
+repository = "https://github.com/swrneko/dom2figma"
+keywords = ["figma", "chrome", "devtools", "design", "prototype"]
+categories = ["command-line-utilities"]
+
+[[bin]]
+name = "dom2figma"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+blake3 = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+clap = { version = "4", features = ["derive", "env"] }
+headless_chrome = "1.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tiny_http = "0.12"
+toml = "1"
+url = "2"
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
